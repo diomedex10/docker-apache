@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  apache:
+    hostname: apache
+    image: httpd:2.4-alpine
+    volumes:
+      - ${httpd_vhosts}:/usr/local/apache2/conf/vhosts_conf
+      - ${httpd_htdocs}:/usr/local/apache2/htdocs
+      - ${httpd_conf}:/usr/local/apache2/conf/httpd.conf
+      - ${httpd_certs}/${httpd_cert_name}:/usr/local/apache2/conf/server.crt
+      - ${httpd_certs}/${httpd_key_name}:/usr/local/apache2/conf/server.key
+      - ${httpd_certs}/${httpd_pem_name}:/usr/local/apache2/conf/server.pem
+    ports:
+      - "80:80"
+      - "443:443"
