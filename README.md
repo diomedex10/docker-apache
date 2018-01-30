@@ -13,22 +13,28 @@ Una vez descargados los archivos del repositorio, la creación de las imágenes 
 docker-compose up -d
 ```
 
+## Setup
+
+Para configurar el docker, hace falta crear un archivo de entorno .env que incluya las siguientes variables:
+
+* `httpd_htdocs`: Es la ruta al directorio que contendrá nuestros proyectos. Deben de ir situados en subcarpetas (ejemplo: htdocs/myproyect y htdocs/myproyect2).
+* `httpd_vhosts`: Es la ruta a un directorio que contendrá los diversos archivos .conf de los distintos virtualhosts que montemos.
+* `httpd_conf`: Aquí irá la ruta de el archivo de configuración de apache (**hhtpd.conf**) que usará nuestro container.
+
+Y, para los certificados:
+
+* `httpd_certs`: Directorio local que alberga los certificados. Por defecto es `./httpd/certs`.
+* `httpd_cert_name`: Nombre del certificado. Por defecto es `server.crt`.
+* `httpd_key_name`: Nombre del archivo con la clave usada para crear el certificado. El valor es `server.key`.
+* `httpd_pem_name`: Nombre del archivo de claves Diffie Hellman usado para crear el certificado. El nombre por defecto es `server.pem`.
+
 ## Puesta en marcha de un proyecto
 
 1. Copiar las aplicaciones de Angular en `./httpd/htdocs`
 2. Copiar los virtualhosts de apache en `./httpd/vhosts_conf`. Recordemos que deben de acabar en *.conf para que apache los trate.
 3. Añadir los hosts en nuestro archivo de hosts (ver más adelante para más información de cómo añadir nuevos hosts).
 
-## Opciones de Configuración
-
-### Opciones de configuración de Apache
-
-Para configurar el docker, hace falta crear un archivo de entorno `.env` que incluya las siguientes variables:
-
-* `httpd_htdocs`: Es la ruta al directorio que contendrá nuestros proyectos. Deben de ir situados en subcarpetas (ejemplo: htdocs/myproyect y htdocs/myproyect2).
-* `httpd_vhosts`: Es la ruta a un directorio que contendrá los diversos archivos .conf de los distintos virtualhosts que montemos.
-* `httpd_conf`: Aquí irá la ruta de el archivo de configuración de apache (**hhtpd.conf**) que usará nuestro container.
-
+## Casos de uso
 
 ### Incluir nuevos virtualhosts en Apache
 
